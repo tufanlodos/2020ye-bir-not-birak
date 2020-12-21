@@ -2,5 +2,5 @@
 
 export default (req, res) => {
   res.statusCode = 200
-  res.json({ name: 'John Doe' })
+  res.json("next.jsten anlıyor gibi bir halin var :)")
 }
