@@ -14,8 +14,21 @@ const getNotes = async (token) => {
     return result;
 }
 
-const createNote = async () => {
-
+const addNote = async (token,postData) => {
+    const response = await fetch(
+        process.env.NEXT_PUBLIC_BASE_API_URL + "notes",
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + token
+            },
+            
+            method: "POST",
+            body:JSON.stringify(postData)
+        }
+    )
+    const result = await response.json(postData);
+    return result;
 }
 
-export {getNotes,createNote}
+export {getNotes,addNote}
