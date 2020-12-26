@@ -15,6 +15,9 @@ const login = async (identifier, password) => {
 }
 
 const register = async (postData) => {
+    // username: 'Strapi user',
+    // email: 'user@strapi.io',
+    // password: 'strapiPassword',
     const response = await fetch(
         process.env.NEXT_PUBLIC_BASE_API_URL + "auth/local/register",
         {

@@ -169,6 +169,23 @@
   white-space: nowrap;
 }
 
+.alertBox{
+  text-align: center;
+  border-radius: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.alertBox.success{
+  background-color: #48A70B;
+  color: white;
+}
+
+.alertBox.error{
+  background-color: #ff0038;
+  color: white;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

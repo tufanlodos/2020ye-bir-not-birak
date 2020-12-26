@@ -6,12 +6,17 @@ import * as CookieMethods from "../common/cookie-methods";
 import * as AuthMethods from "../common/auth-methods";
 import * as NoteMethods from "../common/note-methods";
 
+const RESET_FORM_STATUS = {
+    pending:0,
+    initial:1,
+    success:2
+}
 
 const FormAndList = () => {
     const [loading,setLoading] = useState(true);
     const [token, setToken] = useState(null);
     const [user,setUser] = useState(null);
-    const [resetForm,setResetForm] = useState(true);
+    const [resetForm,setResetForm] = useState(RESET_FORM_STATUS.initial);
     const [notes,setNotes] = useState([]);
 
     const checkUserAndGetToken = async () => {
@@ -34,19 +39,17 @@ const FormAndList = () => {
     const addNote = async (formData) => {
         try {
             const postData = {...formData};
-            if (postData.content === "") {
-                alert("Not girmen zorunlu!");
-                return;
-            } else if(postData.display_name === ""){
+
+            if(postData.display_name === ""){
                 postData.display_name = "2020zede" + (notes.length + 1);
             }
+            
             postData.created_by = {...user};
             const res = await NoteMethods.addNote(token,postData);
             console.log(res);
             if (res && res.created_at) {
-                alert("Ekledin!");
-                setResetForm(false);
-                setResetForm(true);
+                setResetForm(RESET_FORM_STATUS.pending);
+                setResetForm(RESET_FORM_STATUS.success);
                 fetchAndSetNotes(token);
             }
             console.log(res);

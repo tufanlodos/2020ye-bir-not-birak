@@ -8,12 +8,34 @@ const INITIAL_FORM_DATA = {
 
 const Form = (props) => {
     const [formData,setFormData] = useState(INITIAL_FORM_DATA);
+    const [errorMessage,setErrorMessage] = useState(null); 
+    const [successMessage,setSuccessMessage] = useState(null); 
 
     useEffect(()=>{
         if (props.resetForm) {
-            setFormData(INITIAL_FORM_DATA)
+            setFormData(INITIAL_FORM_DATA);
+            setErrorMessage(null);
+            if (props.resetForm === 2) {
+                setSuccessMessage("Notun emin ellerde!");
+                setTimeout(() => {
+                    setSuccessMessage(null);
+                }, 2000);
+            }
         }
     },[props.resetForm])
+
+    const checkFirst = () => {
+        const postData = {...formData};
+
+        if (postData.content === "") {
+            setErrorMessage("Not girmen zorunlu!");
+            setTimeout(() => {
+                setErrorMessage(null);
+            }, 2000);
+            return;
+        }
+        props.addNote(formData)
+    }
 
     return <div className={styles.card}>
         <h3>Kimden</h3>
@@ -37,9 +59,12 @@ const Form = (props) => {
         <div className={styles.cardSubmitButtonContainer}>
             <button 
                 className={styles.cardSubmitButton}
-                onClick={() => props.addNote(formData)}
+                onClick={checkFirst}
             >Gönder</button>
         </div>
+        <br />
+        {errorMessage ? <p className={`${styles.alertBox} ${styles.error}`}>{errorMessage}</p> : null}
+        {successMessage ? <p className={`${styles.alertBox} ${styles.success}`}>{successMessage}</p> : null}
     </div>
 }
 
