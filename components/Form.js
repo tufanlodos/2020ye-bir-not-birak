@@ -15,6 +15,7 @@ const Form = (props) => {
         if (props.resetForm) {
             setFormData(INITIAL_FORM_DATA);
             setErrorMessage(null);
+            setSuccessMessage(null);
             if (props.resetForm === 2) {
                 setSuccessMessage("Notun emin ellerde!");
                 setTimeout(() => {

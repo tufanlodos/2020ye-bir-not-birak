@@ -177,12 +177,12 @@
 }
 
 .alertBox.success{
-  background-color: #48A70B;
+  background-color: #70f300;
   color: white;
 }
 
 .alertBox.error{
-  background-color: #ff0038;
+  background-color: #f30a00;
   color: white;
 }
 
