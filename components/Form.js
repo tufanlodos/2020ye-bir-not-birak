@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from '../styles/Home.module.css';
-import * as NoteMethods from "../common/note-methods";
 
 const INITIAL_FORM_DATA = {
     display_name:"",
@@ -10,27 +9,13 @@ const INITIAL_FORM_DATA = {
 const Form = (props) => {
     const [formData,setFormData] = useState(INITIAL_FORM_DATA);
 
-    const addNote = async () => {
-        try {
-            const postData = {...formData};
-            if (postData.content === "") {
-                alert("Not girmen zorunlu!");
-                return;
-            } else if(postData.display_name === ""){
-                postData.display_name = "2020zede" + Date.now()
-            }
-            const res = await NoteMethods.addNote(props.token,postData);
-            if (res && res.created_at) {
-                alert("Ekledin!");
-                setFormData(INITIAL_FORM_DATA);
-            }
-            console.log(res);
-        } catch (error) {
-            
+    useEffect(()=>{
+        if (props.resetForm) {
+            setFormData(INITIAL_FORM_DATA)
         }
-    }
+    },[props.resetForm])
 
-    return props.token ? <div className={styles.card}>
+    return <div className={styles.card}>
         <h3>Kimden</h3>
         <input 
             className={styles.cardInput} 
@@ -52,10 +37,10 @@ const Form = (props) => {
         <div className={styles.cardSubmitButtonContainer}>
             <button 
                 className={styles.cardSubmitButton}
-                onClick={addNote}
+                onClick={() => props.addNote(formData)}
             >Gönder</button>
         </div>
-    </div> : null
+    </div>
 }
 
 export default Form

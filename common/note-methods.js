@@ -1,6 +1,6 @@
 const getNotes = async (token) => {
     const response = await fetch(
-        process.env.NEXT_PUBLIC_BASE_API_URL + "notes",
+        process.env.NEXT_PUBLIC_BASE_API_URL + "notes?_sort=created_at:DESC",
         {
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ const addNote = async (token,postData) => {
             body:JSON.stringify(postData)
         }
     )
-    const result = await response.json(postData);
+    const result = await response.json();
     return result;
 }
 
