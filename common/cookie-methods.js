@@ -6,7 +6,7 @@ const setUserCookie = () => {
     if (user) {
         return;
     } else {
-        const user = {username:"kullanici1",email:"kullanici1@kullanici.com",role:"Authenticated"};
+        const user = {username:"kullanici1",password:"kullanici1",email:"kullanici1@kullanici.com",role:"Authenticated"};
         const encryptedUser = sjcl.encrypt(process.env.NEXT_PUBLIC_USER_INFO_OBJECT_ALGORITHM, JSON.stringify(user));
         const encryptedUserInfoKey = sjcl.encrypt(process.env.NEXT_PUBLIC_USER_INFO_COOKIE_KEY_NAME_ALGORITHM,process.env.NEXT_PUBLIC_USER_INFO_COOKIE_KEY_NAME);
         jsCookie.set(encryptedUserInfoKey,encryptedUser);
@@ -26,7 +26,7 @@ const getUserFromCookie = () => {
             }
         }
     }
-    return result;
+    return JSON.parse(result);
 }
 
 export { getUserFromCookie,setUserCookie }

@@ -1,8 +1,8 @@
 import React from "react";
 import styles from '../styles/Home.module.css';
 
-const Form = () => {
-    return <div className={styles.card}>
+const Form = (props) => {
+    return props.token ? <div className={styles.card}>
         <h3>Kimden</h3>
         <input className={styles.cardInput} type="text" placeholder="Boş bırakılırsa varsayılan bir isim atanır" />
         <br />
@@ -12,7 +12,7 @@ const Form = () => {
         <div className={styles.cardSubmitButtonContainer}>
             <button className={styles.cardSubmitButton}>Gönder</button>
         </div>
-    </div>
+    </div> : null
 }
 
 export default Form

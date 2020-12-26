@@ -1,18 +1,14 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import * as CookieMethods from "../common/cookie-methods";
 import FormAndList from '../components/FormAndList';
 
 export default function Home() {
-  const user = CookieMethods.getUserFromCookie();
-  console.log("user buuu",user);
-  // CookieMethods.setUserCookie();
 
   return (
     <div className={styles.container}>
       <Head>
         <title>2020'ye Bir Not Bırak</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico"/>
       </Head>
 
       <main className={styles.main}>
