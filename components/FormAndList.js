@@ -32,7 +32,6 @@ const FormAndList = () => {
                 setToken(loginResult.jwt);
                 setUser(loginResult.user);
                 fetchAndSetNotes(loginResult.jwt, false);
-                setLoading(false);
             }
         }
         // CookieMethods.setUserCookie();
@@ -95,7 +94,7 @@ const FormAndList = () => {
     },[])
 
     return <div className={styles.grid}>
-        {loading ? <p>Yüklenmekte...</p> : <>
+        {loading ? <p>Geliyor gelmekte olan...</p> : <>
             <Form addNote={(formData)=>addNote(formData)} resetForm={resetForm}/>
 
             <>

@@ -78,6 +78,7 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 3rem;
+  max-width: 800px;
 }
 
 .card {
@@ -97,7 +98,7 @@
 }
 
 .card.noteItem{
-  height: 50px;
+  
 }
 
 .cardInput{
