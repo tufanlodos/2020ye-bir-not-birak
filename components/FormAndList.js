@@ -23,19 +23,20 @@ const FormAndList = () => {
     const [listItemStartIndex,setListItemStartIndex] = useState(0);
 
     const checkUserAndGetToken = async () => {
-        const user = CookieMethods.getUserFromCookie();
-        console.log("user buuu",user);
-        if (user) {
-            const loginResult = await AuthMethods.login(user.email,user.password);
-            console.log(loginResult)
-            if (loginResult && loginResult.jwt) {
-                setToken(loginResult.jwt);
-                setUser(loginResult.user);
-                fetchAndSetNotes(loginResult.jwt, false);
-            }
+        const cookie = CookieMethods.getUserFromCookie();
+        console.log("USER BUU",cookie);
+        let loginResult;
+        if (cookie) {
+            loginResult = await AuthMethods.login(cookie.user.email,cookie.user.password);
+        } else {
+            loginResult = await CookieMethods.setUserCookie();
         }
-        // CookieMethods.setUserCookie();
-        // console.log();
+
+        if (loginResult && loginResult.jwt) {
+            setToken(loginResult.jwt);
+            setUser(loginResult.user);
+            fetchAndSetNotes(loginResult.jwt, false);
+        }
     }
 
     const addNote = async (formData) => {

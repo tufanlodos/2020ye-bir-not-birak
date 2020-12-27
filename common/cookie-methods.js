@@ -1,22 +1,33 @@
 import sjcl from "./sjcl";
 import jsCookie from 'js-cookie';
+import {register} from "../common/auth-methods";
 
-const setUserCookie = () => {
+const setUserCookie = async () => {
     const user = getUserFromCookie();
     if (user) {
         return;
-    } else {
-        const user = {username:"kullanici1",password:"kullanici1",email:"kullanici1@kullanici.com",role:"Authenticated"};
-        const encryptedUser = sjcl.encrypt(process.env.NEXT_PUBLIC_USER_INFO_OBJECT_ALGORITHM, JSON.stringify(user));
-        const encryptedUserInfoKey = sjcl.encrypt(process.env.NEXT_PUBLIC_USER_INFO_COOKIE_KEY_NAME_ALGORITHM,process.env.NEXT_PUBLIC_USER_INFO_COOKIE_KEY_NAME);
-        jsCookie.set(encryptedUserInfoKey,encryptedUser);
     }
+
+    const postData = {
+        username:Date.now(),
+        password:"very_hard",
+        email:`${Date.now()}@${Date.now()}.io`
+    };
+
+    const registerResult = await register(postData);
+    registerResult.user.password = postData.password;
+
+    const encryptedUser = sjcl.encrypt(process.env.NEXT_PUBLIC_USER_INFO_OBJECT_ALGORITHM, JSON.stringify(registerResult));
+    const encryptedUserInfoKey = sjcl.encrypt(process.env.NEXT_PUBLIC_USER_INFO_COOKIE_KEY_NAME_ALGORITHM,process.env.NEXT_PUBLIC_USER_INFO_COOKIE_KEY_NAME);
+    jsCookie.set(encryptedUserInfoKey,encryptedUser);
+
+    return registerResult;
 }
 
 const getUserFromCookie = () => {
     let result;
     const allCookies = jsCookie.get();
-    if (allCookies) {
+    if (allCookies && Object.keys(allCookies).length > 0) {
         for (let i = 0; i < Object.keys(allCookies).length; i++) {
             const encryptedCookieKey = Object.keys(allCookies)[i];
             const decryptedCookieKeyName = sjcl.decrypt(process.env.NEXT_PUBLIC_USER_INFO_COOKIE_KEY_NAME_ALGORITHM,encryptedCookieKey);
@@ -25,8 +36,10 @@ const getUserFromCookie = () => {
                 break;
             }
         }
+        return JSON.parse(result);
     }
-    return JSON.parse(result);
+
+    return undefined
 }
 
 export { getUserFromCookie,setUserCookie }
