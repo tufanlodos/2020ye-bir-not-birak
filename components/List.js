@@ -12,7 +12,6 @@ const List = (props) => {
             rootMargin: "20px",
             threshold: 0.8
         };
-        console.log(props.notesData,loader);
         const observer = new IntersectionObserver(handleObserver, options);
         if (loader.current) {
             observer.observe(loader.current)
@@ -33,7 +32,6 @@ const List = (props) => {
 
     const toggleShowAllOrHide = (id) => {
         const _showAllOf = {...showAllOf};
-        console.log(_showAllOf)
         if (_showAllOf[id]) {
             delete _showAllOf[id];
         } else {

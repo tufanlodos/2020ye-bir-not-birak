@@ -1,5 +1,4 @@
 const getNotes = async (token, listItemStartIndex) => {
-    console.log("KAÇ İSTESİN",listItemStartIndex);
     const response = await fetch(
         process.env.NEXT_PUBLIC_BASE_API_URL + `notes?_start=${listItemStartIndex}&_limit=${Number(process.env.NEXT_PUBLIC_PAGINATION_PER_PAGE)}&_sort=created_at:DESC`,
         {

@@ -26,7 +26,6 @@ const FormAndList = () => {
 
     const checkUserAndGetToken = async () => {
         const cookie = CookieMethods.getUserFromCookie();
-        console.log("USER BUU",cookie);
         try {
             let loginResult;
             if (cookie) {
@@ -55,13 +54,11 @@ const FormAndList = () => {
             
             postData.created_by = {...user};
             const res = await NoteMethods.addNote(token,postData);
-            console.log(res);
             if (res && res.created_at) {
                 setResetForm(RESET_FORM_STATUS.pending);
                 setResetForm(RESET_FORM_STATUS.success);
                 fetchAndSetNotes(token, false);
             }
-            console.log(res);
         } catch (error) {
             setError(error);
         }
@@ -70,7 +67,6 @@ const FormAndList = () => {
     const fetchAndSetNotes = async (_token, isMore) => {
         try {
             const noteCount = await NoteMethods.getNoteCount(_token);
-            console.log(noteCount)
             if (noteCount && Number.isFinite(noteCount)) {
                 let _listItemStartIndex;
                 if (isMore) {
