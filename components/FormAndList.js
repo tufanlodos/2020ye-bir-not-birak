@@ -68,7 +68,7 @@ const FormAndList = () => {
             if (noteCount && Number.isFinite(noteCount)) {
                 let _listItemStartIndex;
                 if (isMore) {
-                    _listItemStartIndex = listItemStartIndex + 20;
+                    _listItemStartIndex = listItemStartIndex + Number(process.env.NEXT_PUBLIC_PAGINATION_PER_PAGE);
                 } else {
                     _listItemStartIndex = 0;
                     setFetchedNotes({data:[],totalCount:noteCount});
@@ -77,7 +77,6 @@ const FormAndList = () => {
                 setListItemStartIndex(_listItemStartIndex);
 
                 const notes = await NoteMethods.getNotes(_token, _listItemStartIndex);
-                console.log("GELENE BAKA",notes,isMore);
                 
                 if (notes && Array.isArray(notes)) {
                     if (isMore) {
