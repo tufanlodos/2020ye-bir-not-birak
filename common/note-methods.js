@@ -1,7 +1,7 @@
 const getNotes = async (token, listItemStartIndex) => {
     console.log("KAÇ İSTESİN",listItemStartIndex);
     const response = await fetch(
-        process.env.NEXT_PUBLIC_BASE_API_URL + `notes?_start=${listItemStartIndex}&_limit=7&_sort=created_at:DESC`,
+        process.env.NEXT_PUBLIC_BASE_API_URL + `notes?_start=${listItemStartIndex}&_limit=20&_sort=created_at:DESC`,
         {
             headers: {
                 'Content-Type': 'application/json',
