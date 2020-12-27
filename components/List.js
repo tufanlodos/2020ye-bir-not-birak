@@ -66,9 +66,9 @@ const List = (props) => {
         }
         {props.notesData.data.length !== props.notesData.totalCount ? <div ref={loader}>
             <p className={styles.textCenter}>Devamı yükleniyor...</p>
-        </div> : <p className={styles.textCenter}>
+        </div> : props.notesData.data.length > 5 ? <p className={styles.textCenter}>
             Bütün yılı bitirmiş gibi duruyorsun. Başka not kalmadı.
-        </p>}
+        </p> : null}
     </div> : null
 }
 
