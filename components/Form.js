@@ -17,7 +17,7 @@ const Form = (props) => {
             setErrorMessage(null);
             setSuccessMessage(null);
             if (props.resetForm === 2) {
-                setSuccessMessage("Notun emin ellerde!");
+                setSuccessMessage("Notun emin ellerde, teşekkürler!");
                 setTimeout(() => {
                     setSuccessMessage(null);
                 }, 2000);

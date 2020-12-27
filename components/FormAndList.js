@@ -18,6 +18,7 @@ const FormAndList = () => {
     const [user,setUser] = useState(null);
     const [resetForm,setResetForm] = useState(RESET_FORM_STATUS.initial);
     const [notes,setNotes] = useState([]);
+    const [noteCount,setNoteCount] = useState(null);
 
     const checkUserAndGetToken = async () => {
         const user = CookieMethods.getUserFromCookie();
@@ -60,6 +61,10 @@ const FormAndList = () => {
 
     const fetchAndSetNotes = async (_token) => {
         try {
+            const noteCount = await NoteMethods.getNoteCount(_token);
+            if (noteCount && Number.isFinite(noteCount)) {
+                setNoteCount(noteCount);
+            }
             const notes = await NoteMethods.getNotes(_token);
             console.log("NEE GELEE",notes)
             if (notes && Array.isArray(notes)) {
@@ -79,6 +84,9 @@ const FormAndList = () => {
     return <div className={styles.grid}>
         {loading ? <p>Yüklenmekte...</p> : <>
             <Form addNote={(formData)=>addNote(formData)} resetForm={resetForm}/>
+
+            {noteCount ? <h3 style={{color:"#0070f3"}}>Notlar ({noteCount})</h3> : null}
+
             <List notes={notes}/>
         </>}
     </div>
