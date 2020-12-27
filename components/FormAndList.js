@@ -122,7 +122,7 @@ const FormAndList = () => {
                 {showList ? <List
                     notesData={fetchedNotes}
                     getMore={() => fetchAndSetNotes(token, true)}
-                /> : fetchedNotes.data.length > 0 ? <p>Çok az kaldı...</p> : <p>Henüz not bırakılmamış gibi duruyor, bu şeref senin.</p>}
+                /> : fetchedNotes.data.length > 0 ? <p>Çok az kaldı...</p> : <p>Bir şeyler gelebilir, gelmeyebilir de.</p>}
             </>
         </>}
     </div>

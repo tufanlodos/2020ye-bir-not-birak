@@ -78,7 +78,7 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 3rem;
-  max-width: 800px;
+  max-width: 70vw;
 }
 
 .card {
@@ -244,6 +244,7 @@
 @media (max-width: 600px) {
   .grid {
     width: 100%;
+    max-width: 90vw;
     flex-direction: column;
   }
 
