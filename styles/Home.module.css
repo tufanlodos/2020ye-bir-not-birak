@@ -94,7 +94,7 @@
 }
 
 .card.form{
-  width: 80%;
+  width: 60vw
 }
 
 .card.noteItem{
@@ -225,5 +225,9 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+
+  .card.form{
+    width: 80vw
   }
 }

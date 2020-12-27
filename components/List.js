@@ -11,7 +11,7 @@ const List = (props) => {
             rootMargin: "20px",
             threshold: 0.8
         };
-        
+        console.log(props.notesData,loader);
         const observer = new IntersectionObserver(handleObserver, options);
         if (loader.current) {
             observer.observe(loader.current)
