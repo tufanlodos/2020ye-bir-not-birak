@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Router from 'next/router';
 import Form from "./Form";
 import List from "./List";
 import styles from '../styles/Home.module.css';
@@ -66,6 +65,7 @@ const FormAndList = () => {
     const fetchAndSetNotes = async (_token, isMore) => {
         try {
             const noteCount = await NoteMethods.getNoteCount(_token);
+            console.log(noteCount)
             if (noteCount && Number.isFinite(noteCount)) {
                 let _listItemStartIndex;
                 if (isMore) {
@@ -87,9 +87,9 @@ const FormAndList = () => {
                         setFetchedNotes({data:notes,totalCount:noteCount});
                         setShowList(true);
                     }
-                    setLoading(false);
                 }                
             }
+            setLoading(false);
         } catch (error) {}
     }
 
@@ -119,7 +119,7 @@ const FormAndList = () => {
                 {showList ? <List 
                     notesData={fetchedNotes}
                     getMore={() => fetchAndSetNotes(token, true)}
-                /> : null}
+                /> : <p>Çok az kaldı...</p>}
             </>
         </>}
     </div>
