@@ -73,10 +73,10 @@
 
 .grid {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
   margin-top: 3rem;
 }
 
@@ -90,6 +90,14 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.card.form{
+  width: 80%;
+}
+
+.card.noteItem{
+  height: 50px;
 }
 
 .cardInput{
@@ -184,6 +192,32 @@
 .alertBox.error{
   background-color: #f30a00;
   color: white;
+}
+
+.textCenter{
+  text-align: center;
+}
+
+.btnInitial{
+  background: white;
+  border: none;
+  cursor: pointer;
+  outline: 0;
+}
+
+.pt5{
+  padding-top: 5px;
+}
+
+.colorPrimary{
+  color:#0070f3
+}
+
+.fdRowCenter{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 600px) {

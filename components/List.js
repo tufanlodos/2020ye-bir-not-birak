@@ -1,18 +1,29 @@
 import React, { useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import styles from '../styles/Home.module.css';
 
 const List = (props) => {
-    const [loading,setLoading] = useState(true);
+    console.log(props.notesData.data.length !== props.noteCount)
 
-    return props.notes ? <>
-        {props.notes.map((note, index) => {
-            return <div key={`${note.id}`} className={styles.card}>
-                <h3>{note.display_name}</h3>
-                <p>{note.content}</p>
-            </div>
-        })}
-        {loading ? <p>Yüklenmekte...</p> : null}
-    </> : null
+    return props.notesData.data && props.notesData.data.length > 0 ? 
+        <InfiniteScroll
+            dataLength={props.notesData.totalCount}
+            next={props.getMore}
+            hasMore={props.notesData.data.length !== props.noteCount}
+            loader={<p className={styles.textCenter}>Yüklenmekte...</p>}
+            endMessage={
+                <p className={styles.textCenter}>
+                    Bütün yılı bitirmiş gibi duruyorsun. Başka not kalmadı.
+                </p>
+            }
+        >
+            {props.notesData.data.map((note, index) => {
+                return <div key={`${note.id}`} className={`${styles.card} ${styles.noteItem}`}>
+                    <h3>{note.display_name}</h3>
+                    <p>{note.content}</p>
+                </div>
+            })}
+        </InfiniteScroll> : null
 }
 
 export default List

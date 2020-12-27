@@ -38,7 +38,7 @@ const Form = (props) => {
         props.addNote(formData)
     }
 
-    return <div className={styles.card}>
+    return <div className={`${styles.card} ${styles.form}`}>
         <h3>Kimden</h3>
         <input 
             className={styles.cardInput} 
