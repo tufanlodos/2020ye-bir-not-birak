@@ -102,7 +102,7 @@ const FormAndList = () => {
     },[])
 
     return <div className={styles.grid}>
-        {error ? <p>Başaramadık abi.</p> : loading ? <p>Geliyor gelmekte olan...</p> : <>
+        {error ? <p>Başaramadık abi.</p> : loading ? <p>Geliyor gelmekte olan... (Maalesef 30 sn. kadar sürebilir)</p> : <>
             <Form addNote={(formData) => addNote(formData)} resetForm={resetForm} />
 
             <>
